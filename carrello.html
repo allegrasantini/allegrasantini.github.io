@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Carrello — Allegra Santini</title>
+<meta name="description" content="Carrello dimostrativo del negozio Allegra Santini in anteprima.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="anteprima">Sito in anteprima — <strong>collezione e prezzi in arrivo</strong></div>
+
+<header class="sito">
+  <div class="wrap">
+    <a class="logo" href="index.html">Allegra Santini<small>Borse</small></a>
+    <nav class="main">
+      <a href="index.html">Home</a>
+      <a href="index.html#collezione">Collezione</a>
+      <a href="contatti.html">Contatti</a>
+      <a href="carrello.html" class="carrello-link attivo">Carrello <span class="conteggio" data-conteggio style="display:none">0</span></a>
+    </nav>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <div class="sezione-testata">
+      <p class="occhiello">Anteprima</p>
+      <h2>Il tuo carrello</h2>
+      <p>Carrello dimostrativo: i prodotti restano salvati solo nel tuo browser. Prezzi e acquisti saranno attivi con il lancio ufficiale.</p>
+    </div>
+
+    <div id="elenco"></div>
+
+    <div class="riepilogo" id="riepilogo" style="display:none">
+      <table>
+        <tr><td>Prodotti</td><td id="num-prodotti">0</td></tr>
+        <tr><td>Subtotale</td><td>Prezzo da definire</td></tr>
+        <tr><td>Spedizione</td><td>Da definire</td></tr>
+        <tr class="totale"><td>Totale</td><td>Da definire</td></tr>
+      </table>
+      <button class="btn" type="button" disabled style="width:100%;margin-top:18px">Vai al pagamento</button>
+      <p class="nota-piccola" style="text-align:center">Pagamento in arrivo (Shopify). In questa anteprima non è possibile completare acquisti.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div>
+      <h3>Allegra Santini</h3>
+      <p>Borse. Sito in anteprima: collezione, prezzi e vendite saranno attivati con il lancio ufficiale.</p>
+    </div>
+    <div>
+      <h3>Pagine</h3>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="index.html#collezione">Collezione</a></li>
+        <li><a href="prodotto.html">Scheda prodotto</a></li>
+        <li><a href="carrello.html">Carrello</a></li>
+        <li><a href="contatti.html">Contatti</a></li>
+      </ul>
+    </div>
+    <div>
+      <h3>Contatti</h3>
+      <ul>
+        <li>Email (segnaposto): <a href="mailto:info@allegrasantini.it">info@allegrasantini.it</a></li>
+        <li><a href="contatti.html">Modulo contatti</a></li>
+      </ul>
+    </div>
+    <p class="copyright">© Allegra Santini — Sito in anteprima, nessun acquisto è ancora possibile. Testi e immagini sono segnaposto.</p>
+  </div>
+</footer>
+
+<script src="js/cart.js"></script>
+<script>
+(function () {
+  var elenco = document.getElementById("elenco");
+  var riepilogo = document.getElementById("riepilogo");
+  var COLORI = { "borsa-esempio-1": "f1" };
+  var SVG = '<svg viewBox="0 0 100 100" aria-hidden="true" style="width:58%"><path d="M28 38h44l4 46H24z" fill="none" stroke="#7a5a34" stroke-width="3"/><path d="M38 38v-6a12 12 0 0 1 24 0v6" fill="none" stroke="#7a5a34" stroke-width="3"/></svg>';
+
+  function disegna() {
+    var voci = AllegraCarrello.voci();
+    if (!voci.length) {
+      elenco.innerHTML = '<div class="vuoto"><p style="font-size:1.1rem;color:var(--nero);font-family:Playfair Display,Georgia,serif">Il carrello è vuoto</p>' +
+        '<p style="margin-top:8px">Aggiungi una borsa dalla scheda prodotto per vedere qui come funzionerà il carrello.</p>' +
+        '<a class="btn" href="prodotto.html">Vai alla scheda prodotto</a></div>';
+      riepilogo.style.display = "none";
+      return;
+    }
+    elenco.innerHTML = voci.map(function (v) {
+      return '<div class="riga-carrello">' +
+        '<div class="mini foto ' + (COLORI[v.id] || "f2") + '">' + SVG + '</div>' +
+        '<div><p class="nome">' + v.nome + '</p><p style="color:var(--debole);font-size:.92rem">Prezzo da definire</p></div>' +
+        '<div class="azioni-riga">' +
+          '<span class="qty"><button type="button" data-meno="' + v.id + '" aria-label="Diminuisci">−</button><strong>' + v.qty + '</strong><button type="button" data-piu="' + v.id + '" aria-label="Aumenta">+</button></span>' +
+          '<button type="button" class="rimuovi" data-rimuovi="' + v.id + '">Rimuovi</button>' +
+        '</div></div>';
+    }).join("");
+    document.getElementById("num-prodotti").textContent =
+      voci.reduce(function (t, v) { return t + v.qty; }, 0);
+    riepilogo.style.display = "block";
+    elenco.querySelectorAll("[data-piu]").forEach(function (b) {
+      b.addEventListener("click", function () {
+        var v = AllegraCarrello.voci().find(function (x) { return x.id === b.getAttribute("data-piu"); });
+        AllegraCarrello.impostaQty(v.id, v.qty + 1); disegna();
+      });
+    });
+    elenco.querySelectorAll("[data-meno]").forEach(function (b) {
+      b.addEventListener("click", function () {
+        var v = AllegraCarrello.voci().find(function (x) { return x.id === b.getAttribute("data-meno"); });
+        AllegraCarrello.impostaQty(v.id, v.qty - 1); disegna();
+      });
+    });
+    elenco.querySelectorAll("[data-rimuovi]").forEach(function (b) {
+      b.addEventListener("click", function () {
+        AllegraCarrello.rimuovi(b.getAttribute("data-rimuovi")); disegna();
+      });
+    });
+  }
+  disegna();
+})();
+</script>
+</body>
+</html>

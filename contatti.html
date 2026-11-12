@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contatti — Allegra Santini</title>
+<meta name="description" content="Contatti Allegra Santini: modulo di contatto ed email. Sito in anteprima.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="anteprima">Sito in anteprima — <strong>collezione e prezzi in arrivo</strong></div>
+
+<header class="sito">
+  <div class="wrap">
+    <a class="logo" href="index.html">Allegra Santini<small>Borse</small></a>
+    <nav class="main">
+      <a href="index.html">Home</a>
+      <a href="index.html#collezione">Collezione</a>
+      <a href="contatti.html" class="attivo">Contatti</a>
+      <a href="carrello.html" class="carrello-link">Carrello <span class="conteggio" data-conteggio style="display:none">0</span></a>
+    </nav>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <div class="sezione-testata">
+      <p class="occhiello">Contatti</p>
+      <h2>Scrivici</h2>
+      <p>Per domande sulla collezione in arrivo o sul negozio, usa il modulo oppure l'email qui sotto.</p>
+    </div>
+
+    <div style="text-align:center;margin-bottom:10px">
+      <p>Email (segnaposto): <a href="mailto:info@allegrasantini.it" style="font-weight:600">info@allegrasantini.it</a></p>
+    </div>
+
+    <form class="stack" data-demo>
+      <label for="nome">Nome</label>
+      <input type="text" id="nome" name="nome" placeholder="Il tuo nome" required>
+
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" placeholder="La tua email" required>
+
+      <label for="oggetto">Oggetto</label>
+      <select id="oggetto" name="oggetto">
+        <option>Informazioni sulla collezione</option>
+        <option>Informazioni su un prodotto</option>
+        <option>Collaborazioni e negozi</option>
+        <option>Altro</option>
+      </select>
+
+      <label for="messaggio">Messaggio</label>
+      <textarea id="messaggio" name="messaggio" rows="6" placeholder="Scrivi qui il tuo messaggio" required></textarea>
+
+      <button class="btn" type="submit" style="width:100%;margin-top:22px">Invia il messaggio</button>
+      <div class="messaggio-ok">Grazie per il messaggio! In questa anteprima il modulo è dimostrativo e non invia ancora nulla: per contattarci usa l'email indicata sopra.</div>
+      <p class="nota-piccola">Modulo solo dimostrativo: in questa anteprima non raccoglie né invia dati. Sarà collegato a un servizio email con il lancio ufficiale.</p>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div>
+      <h3>Allegra Santini</h3>
+      <p>Borse. Sito in anteprima: collezione, prezzi e vendite saranno attivati con il lancio ufficiale.</p>
+    </div>
+    <div>
+      <h3>Pagine</h3>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="index.html#collezione">Collezione</a></li>
+        <li><a href="prodotto.html">Scheda prodotto</a></li>
+        <li><a href="carrello.html">Carrello</a></li>
+        <li><a href="contatti.html">Contatti</a></li>
+      </ul>
+    </div>
+    <div>
+      <h3>Contatti</h3>
+      <ul>
+        <li>Email (segnaposto): <a href="mailto:info@allegrasantini.it">info@allegrasantini.it</a></li>
+        <li><a href="contatti.html">Modulo contatti</a></li>
+      </ul>
+    </div>
+    <p class="copyright">© Allegra Santini — Sito in anteprima, nessun acquisto è ancora possibile. Testi e immagini sono segnaposto.</p>
+  </div>
+</footer>
+
+<script src="js/cart.js"></script>
+</body>
+</html>
